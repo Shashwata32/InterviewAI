@@ -246,8 +246,25 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
     return pdfBuffer;
 }
 
+// async function generatePdfFromHtml(htmlContent) {
+//     const browser = await puppeteer.launch();
+//     const page = await browser.newPage();
+//     await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
+//     const pdfBuffer = await page.pdf({ format: 'A4', margin: { top: '20mm', bottom: '20mm', left: '15mm', right: '15mm' } });
+//     await browser.close();
+//     return pdfBuffer;
+// }
+
+const chromium = require("@sparticuz/chromium");
+const puppeteer = require("puppeteer-core");
+
 async function generatePdfFromHtml(htmlContent) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        args: chromium.args,
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless,
+        defaultViewport: chromium.defaultViewport,
+    });
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
     const pdfBuffer = await page.pdf({ format: 'A4', margin: { top: '20mm', bottom: '20mm', left: '15mm', right: '15mm' } });
