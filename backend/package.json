@@ -15,6 +15,7 @@
     "zod-to-json-schema": "^3.25.2"
   },
   "scripts": {
-    "dev": "npx nodemon server.js"
+    "dev": "npx nodemon server.js",
+    "start": "node server.js"
   }
 }
