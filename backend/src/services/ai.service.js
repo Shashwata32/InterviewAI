@@ -255,7 +255,8 @@ async function generateResumePdf({ resume, selfDescription, jobDescription }) {
 //     return pdfBuffer;
 // }
 
-const chromium = require("@sparticuz/chromium");
+const chromiumPkg = require("@sparticuz/chromium");
+const chromium = chromiumPkg.default || chromiumPkg;
 const puppeteer = require("puppeteer-core");
 
 async function generatePdfFromHtml(htmlContent) {
